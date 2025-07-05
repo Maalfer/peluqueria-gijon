@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peluqueros</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#333333',secondary:'#999999'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+.logo-font {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+h2, h3 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+}
+body {
+  font-family: 'Playfair Display', serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+.damask-pattern {
+  background-image: url("https://readdy.ai/api/search-image?query=elegant%2520damask%2520pattern%2520in%2520grayscale%2520with%2520intricate%2520sicilian%2520style%2520motifs%252C%2520subtle%2520texture%252C%2520vintage%2520wallpaper%2520design%2520from%2520the%25201970s%252C%2520sophisticated%2520and%2520classy%252C%2520seamless%2520pattern%252C%2520high%2520contrast%2520between%2520light%2520and%2520dark%2520grays&width=1200&height=800&seq=1&orientation=landscape");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+}
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("https://readdy.ai/api/search-image?query=elegant%2520black%2520and%2520white%2520photo%2520of%2520a%2520luxury%2520vintage%2520barber%2520shop%2520interior%2520from%2520the%25201970s%252C%2520cinematic%2520lighting%252C%2520dramatic%2520shadows%252C%2520leather%2520chairs%252C%2520ornate%2520mirrors%252C%2520Italian%2520mafia%2520style%2520aesthetic%252C%2520moody%2520atmosphere%252C%2520professional%2520photography%252C%2520film%2520noir%2520style&width=1200&height=600&seq=2&orientation=landscape");
+  background-position: center;
+  background-size: cover;
+}
+.logo-font {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.review-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: 300px;
+}
+.review-container {
+  display: flex;
+  transition: transform 1s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+.review-item {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.vintage-border {
+  position: relative;
+}
+.vintage-border::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 1px solid #999;
+  pointer-events: none;
+}
+.vintage-border::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 1px solid #666;
+  pointer-events: none;
+}
+.star {
+  color: #FFD700;
+}
+.contact-card {
+  background-image: url("https://readdy.ai/api/search-image?query=vintage%2520paper%2520texture%2520in%2520light%2520beige%2520color%252C%2520slightly%2520aged%2520with%2520subtle%2520stains%2520and%2520wrinkles%252C%2520elegant%2520old%2520document%2520appearance%252C%2520high%2520resolution%2520texture%252C%2520neutral%2520background%2520for%2520text&width=800&height=500&seq=3&orientation=landscape");
+  background-size: cover;
+}
+.audio-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 50px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.audio-player button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin: 0 5px;
+}
+.volume-slider {
+  -webkit-appearance: none;
+  width: 60px;
+  height: 3px;
+  background: #666;
+  outline: none;
+  margin: 0 5px;
+}
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.volume-slider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-in {
+  animation: fadeIn 1.5s ease-in-out;
+}
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 2rem 1rem;
+  }
+  .audio-player {
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 12px;
+  }
+  .review-slider {
+    height: 400px;
+  }
+}
+input:focus, button:focus {
+  outline: none;
+}
+</style>
+</head>
+<body class="damask-pattern min-h-screen">
+<div class="max-w-7xl mx-auto bg-white shadow-2xl">
+<!-- Header -->
+<header class="bg-black text-white p-4 md:p-6">
+  <div class="flex justify-between items-center">
+    <h1 class="logo-font text-2xl md:text-4xl"></h1>
+    <nav class="hidden md:block">
+      <ul class="flex space-x-8">
+        <li><a href="#" class="hover:text-gray-300 transition duration-300">Inicio</a></li>
+        <li><a href="#servicios" class="hover:text-gray-300 transition duration-300">Servicios</a></li>
+        <li><a href="#resenas" class="hover:text-gray-300 transition duration-300">Reseñas</a></li>
+        <li><a href="#contacto" class="hover:text-gray-300 transition duration-300">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="md:hidden w-8 h-8 flex items-center justify-center cursor-pointer" id="mobile-menu-button">
+      <i class="ri-menu-line ri-lg"></i>
+    </div>
+  </div>
+  <div class="hidden md:hidden mt-4 pb-2" id="mobile-menu">
+    <ul class="space-y-3">
+      <li><a href="#" class="block hover:text-gray-300 transition duration-300">Inicio</a></li>
+      <li><a href="#servicios" class="block hover:text-gray-300 transition duration-300">Servicios</a></li>
+      <li><a href="#resenas" class="block hover:text-gray-300 transition duration-300">Reseñas</a></li>
+      <li><a href="#contacto" class="block hover:text-gray-300 transition duration-300">Contacto</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-image w-full">
+  <div class="w-full hero-content py-24 md:py-32 px-6 md:px-12 text-white text-center">
+    <h2 class="text-3xl md:text-5xl logo-font mb-4 fade-in">No es personal, es solo estilo</h2>
+    <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto fade-in">El corte es arte, el estilo es ley, y cada cliente... parte de la familia.</p>
+    <button class="bg-white text-black px-8 py-3 text-lg logo-font hover:bg-gray-200 transition duration-300 !rounded-button whitespace-nowrap fade-in">Reserva Ahora</button>
+  </div>
+</section>
+
+<!-- Servicios -->
+<section id="servicios" class="py-16 px-6 md:px-12">
+  <h2 class="text-3xl md:text-4xl logo-font text-center mb-12">Nuestros Servicios</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="bg-gray-100 p-6 shadow-md flex flex-col items-center text-center">
+      <div class="w-16 h-16 flex items-center justify-center mb-4">
+        <i class="ri-scissors-line ri-2x"></i>
+      </div>
+      <h3 class="text-xl logo-font mb-3">Corte</h3>
+      <p class="mb-4">Corte de cabello tradicional con tijera y navaja o cortes modernos como Fades, Slick back, Mullet, Buzz cut, etc.</p>
+      <p class="text-lg font-bold mt-auto">€17</p>
+    </div>
+    <div class="bg-gray-100 p-6 shadow-md flex flex-col items-center text-center">
+      <div class="w-16 h-16 flex items-center justify-center mb-4">
+        <i class="ri-brush-line ri-2x"></i>
+      </div>
+      <h3 class="text-xl logo-font mb-3">Afeitado Tradicional</h3>
+      <p class="mb-4">Afeitado con navaja clásica, toalla y productos premium para un acabado perfecto.</p>
+      <p class="text-lg font-bold mt-auto">€12</p>
+    </div>
+    <div class="bg-gray-100 p-6 shadow-md flex flex-col items-center text-center">
+      <div class="w-16 h-16 flex items-center justify-center mb-4">
+        <i class="ri-user-settings-line ri-2x"></i>
+      </div>
+      <h3 class="text-xl logo-font mb-3">Experiencia Completa</h3>
+      <p class="mb-4">Corte, arreglo de barba y masaje facial.</p>
+      <p class="text-lg font-bold mt-auto">€26</p>
+    </div>
+  </div>
+</section>
+
+<!-- Galería -->
+<section class="py-12 px-6 md:px-12 bg-gray-100">
+  <h2 class="text-3xl md:text-4xl logo-font text-center mb-10">Nuestra Estética</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="overflow-hidden h-64">
+      <img src="https://readdy.ai/api/search-image?query=elegant%2520black%2520and%2520white%2520photo%2520of%2520a%2520vintage%2520barber%2520shop%2520interior%252C%25201970s%2520style%252C%2520Italian%2520mafia%2520aesthetic%252C%2520dramatic%2520lighting%252C%2520leather%2520chair%252C%2520professional%2520barber%2520tools%252C%2520cinematic%2520composition%252C%2520film%2520noir%2520style&width=600&height=400&seq=4&orientation=landscape" alt="Interior barbería" class="w-full h-full object-cover object-top transition duration-500 hover:scale-105">
+    </div>
+    <div class="overflow-hidden h-64">
+      <img src="https://readdy.ai/api/search-image?query=close-up%2520black%2520and%2520white%2520photo%2520of%2520professional%2520barber%2520giving%2520a%2520classic%2520haircut%2520to%2520elegant%2520man%2520in%2520vintage%2520barber%2520chair%252C%25201970s%2520aesthetic%252C%2520Italian%2520style%252C%2520cinematic%2520lighting%252C%2520dramatic%2520shadows%252C%2520professional%2520photography&width=600&height=400&seq=5&orientation=landscape" alt="Corte de cabello" class="w-full h-full object-cover object-top transition duration-500 hover:scale-105">
+    </div>
+    <div class="overflow-hidden h-64">
+      <img src="https://readdy.ai/api/search-image?query=black%2520and%2520white%2520photo%2520of%2520traditional%2520straight%2520razor%2520shaving%2520in%2520vintage%2520barber%2520shop%252C%25201970s%2520aesthetic%252C%2520Italian%2520mafia%2520style%252C%2520cinematic%2520lighting%252C%2520dramatic%2520shadows%252C%2520close-up%2520of%2520barber%2527s%2520hands%2520with%2520razor%252C%2520professional%2520photography&width=600&height=400&seq=6&orientation=landscape" alt="Afeitado tradicional" class="w-full h-full object-cover object-top transition duration-500 hover:scale-105">
+    </div>
+    <div class="overflow-hidden h-64">
+      <img src="https://readdy.ai/api/search-image?query=black%2520and%2520white%2520photo%2520of%2520elegant%2520barber%2520shop%2520products%2520display%252C%2520vintage%2520bottles%2520and%2520grooming%2520accessories%252C%25201970s%2520aesthetic%252C%2520Italian%2520style%252C%2520cinematic%2520lighting%252C%2520dramatic%2520shadows%252C%2520professional%2520photography%252C%2520film%2520noir%2520style&width=600&height=400&seq=7&orientation=landscape" alt="Productos exclusivos" class="w-full h-full object-cover object-top transition duration-500 hover:scale-105">
+    </div>
+    <div class="overflow-hidden h-64">
+      <img src="https://readdy.ai/api/search-image?query=black%2520and%2520white%2520photo%2520of%2520vintage%2520barber%2520shop%2520exterior%2520with%2520classic%2520signage%252C%25201970s%2520aesthetic%252C%2520Italian%2520mafia%2520style%2520architecture%252C%2520cinematic%2520lighting%252C%2520dramatic%2520shadows%252C%2520professional%2520photography%252C%2520film%2520noir%2520style&width=600&height=400&seq=8&orientation=landscape" alt="Exterior de la barbería" class="w-full h-full object-cover object-top transition duration-500 hover:scale-105">
+    </div>
+    <div class="overflow-hidden h-64">
+      <img src="https://readdy.ai/api/search-image?query=black%2520and%2520white%2520photo%2520of%2520well-dressed%2520men%2520in%2520vintage%25201970s%2520style%2520with%2520perfect%2520haircuts%2520and%2520grooming%252C%2520Italian%2520mafia%2520aesthetic%252C%2520cinematic%2520lighting%252C%2520dramatic%2520shadows%252C%2520professional%2520photography%252C%2520film%2520noir%2520style&width=600&height=400&seq=9&orientation=landscape" alt="Clientes satisfechos" class="w-full h-full object-cover object-top transition duration-500 hover:scale-105">
+    </div>
+  </div>
+</section>
+
+<!-- Reseñas -->
+<section id="resenas" class="py-16 px-6 md:px-12 bg-black text-white">
+  <h2 class="text-3xl md:text-4xl logo-font text-center mb-12">Lo Que Dicen Nuestros Clientes</h2>
+  <div class="review-slider max-w-3xl mx-auto vintage-border p-8 bg-gray-900 bg-opacity-50">
+    <div class="review-container" id="review-container">
+      <!-- Las reseñas se generarán dinámicamente con JavaScript -->
+    </div>
+  </div>
+</section>
+
+<!-- Contacto -->
+<section id="contacto" class="py-16 px-6 md:px-12">
+  <h2 class="text-3xl md:text-4xl logo-font text-center mb-12">Encuéntranos</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <div class="contact-card p-8 shadow-lg">
+      <div class="mb-6 flex items-start">
+        <div class="w-10 h-10 flex items-center justify-center mr-4">
+          <i class="ri-map-pin-line ri-lg"></i>
+        </div>
+        <div>
+          <h3 class="text-xl logo-font mb-2">Dirección</h3>
+          <p>Calle de Prueba - Ocultamos la Calle para Proteger la Privacidad del Cliente</p>
+          <p>Gijón, Asturias</p>
+        </div>
+      </div>
+      <div class="mb-6 flex items-start">
+        <div class="w-10 h-10 flex items-center justify-center mr-4">
+          <i class="ri-phone-line ri-lg"></i>
+        </div>
+        <div>
+          <h3 class="text-xl logo-font mb-2">Teléfono</h3>
+          <p>985 35 51 98</p>
+        </div>
+      </div>
+      <div class="mb-6 flex items-start">
+        <div class="w-10 h-10 flex items-center justify-center mr-4">
+          <i class="ri-time-line ri-lg"></i>
+        </div>
+        <div>
+          <h3 class="text-xl logo-font mb-2">Horario</h3>
+          <p>Lunes a Viernes: 9:30–13:30, 16:00–20:00</p>
+          <p>Sábado: 09:00 - 13:00</p>
+          <p>Domingo: Cerrado</p>
+        </div>
+      </div>
+      <div class="flex items-start">
+        <div class="w-10 h-10 flex items-center justify-center mr-4">
+          <i class="ri-mail-line ri-lg"></i>
+        </div>
+        <div>
+          <h3 class="text-xl logo-font mb-2">Email</h3>
+          <p>reservas</p>
+        </div>
+      </div>
+    </div>
+    <div class="h-96 bg-gray-200 relative overflow-hidden">
+      <div style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-position: center; background-size: cover; width: 100%; height: 100%;"></div>
+      <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-4">
+        <p class="text-center">Estamos ubicados en el barrio del llano.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Formulario de Reserva -->
+<section class="py-16 px-6 md:px-12 bg-gray-100">
+  <h2 class="text-3xl md:text-4xl logo-font text-center mb-12">Reserva Tu Visita</h2>
+  <form class="max-w-2xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div>
+        <label for="nombre" class="block mb-2 font-medium">Nombre</label>
+        <input type="text" id="nombre" class="w-full p-3 border border-gray-300 focus:border-black" required>
+      </div>
+      <div>
+        <label for="telefono" class="block mb-2 font-medium">Teléfono</label>
+        <input type="tel" id="telefono" class="w-full p-3 border border-gray-300 focus:border-black" required>
+      </div>
+    </div>
+    <div class="mb-6">
+      <label for="email" class="block mb-2 font-medium">Email</label>
+      <input type="email" id="email" class="w-full p-3 border border-gray-300 focus:border-black" required>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div>
+        <label for="fecha" class="block mb-2 font-medium">Fecha</label>
+        <input type="date" id="fecha" class="w-full p-3 border border-gray-300 focus:border-black" required>
+      </div>
+      <div>
+        <label for="hora" class="block mb-2 font-medium">Hora</label>
+        <input type="time" id="hora" class="w-full p-3 border border-gray-300 focus:border-black" required>
+      </div>
+    </div>
+    <div class="mb-6">
+      <label for="servicio" class="block mb-2 font-medium">Servicio</label>
+      <div class="relative">
+        <select id="servicio" class="w-full p-3 border border-gray-300 focus:border-black appearance-none pr-8" required>
+          <option value="">Selecciona un servicio</option>
+          <option value="corte">Corte</option>
+          <option value="afeitado">Afeitado Tradicional</option>
+          <option value="completo">Experiencia Completa</option>
+        </select>
+        <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+          <i class="ri-arrow-down-s-line"></i>
+        </div>
+      </div>
+    </div>
+    <div class="mb-6">
+      <label for="mensaje" class="block mb-2 font-medium">Mensaje (opcional)</label>
+      <textarea id="mensaje" rows="4" class="w-full p-3 border border-gray-300 focus:border-black"></textarea>
+    </div>
+    <button type="submit" class="bg-black text-white px-8 py-3 text-lg logo-font hover:bg-gray-800 transition duration-300 w-full !rounded-button whitespace-nowrap">Confirmar Reserva</button>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer class="bg-black text-white py-12 px-6 md:px-12">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <div>
+      <h3 class="logo-font text-xl mb-4">Peluqiería</h3>
+      <p class="mb-4">El corte es arte, el estilo es ley, y cada cliente... parte de la familia.</p>
+      <div class="flex space-x-4">
+        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 transition duration-300 rounded-full">
+          <i class="ri-instagram-line"></i>
+        </a>
+        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 transition duration-300 rounded-full">
+          <i class="ri-facebook-line"></i>
+        </a>
+        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 transition duration-300 rounded-full">
+          <i class="ri-twitter-x-line"></i>
+        </a>
+      </div>
+    </div>
+    <div>
+      <h3 class="logo-font text-xl mb-4">Navegación</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:text-gray-300 transition duration-300">Inicio</a></li>
+        <li><a href="#servicios" class="hover:text-gray-300 transition duration-300">Servicios</a></li>
+        <li><a href="#resenas" class="hover:text-gray-300 transition duration-300">Reseñas</a></li>
+        <li><a href="#contacto" class="hover:text-gray-300 transition duration-300">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="logo-font text-xl mb-4">Contacto</h3>
+      <p class="flex items-center mb-2">
+        <span class="w-6 h-6 flex items-center justify-center mr-2"><i class="ri-map-pin-line"></i></span>
+        Calle XX XX XX
+      </p>
+      <p class="flex items-center mb-2">
+        <span class="w-6 h-6 flex items-center justify-center mr-2"><i class="ri-phone-line"></i></span>
+        985 XX XX XX
+      </p>
+      <p class="flex items-center">
+        <span class="w-6 h-6 flex items-center justify-center mr-2"><i class="ri-mail-line"></i></span>
+        reservas
+      </p>
+    </div>
+  </div>
+  <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+    <p>&copy; 2025 Todos los derechos reservados.</p>
+  </div>
+</footer>
+</div>
+
+<!-- Audio Player -->
+<div class="audio-player">
+  <button id="play-pause-btn">
+    <i class="ri-play-fill ri-lg" id="play-icon"></i>
+    <i class="ri-pause-fill ri-lg hidden" id="pause-icon"></i>
+  </button>
+  <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="30">
+  <button id="mute-btn">
+    <i class="ri-volume-up-line" id="volume-icon"></i>
+  </button>
+</div>
+<audio id="background-music" loop>
+  <source src="https://dl.dropbox.com/scl/fi/kcwrpxdq4e4ufbhx4yvxj/italian-mafia-music.mp3?rlkey=dummy&dl=0" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if(mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    }
+    
+    // Reviews slider
+    const reviews = [
+        { name: "Alberto Cárcamo", text: "Corte personalizado y profesional. Muy satisfecho." },
+        { name: "Ursula Canella Oliveira", text: "Gran trabajo y trato. Vale totalmente la pena." },
+        { name: "Gerard Gutierrez Garcia", text: "Siempre un placer." },
+        { name: "Diego Fernández", text: "Trato impecable y corte increíble. Limpio y acogedor." },
+        { name: "Jorge Manuel Gancedo Álvarez", text: "Súper recomendable. Excelente en cortes y barbas." },
+        { name: "Santiago Sánchez", text: "Servicio premium, buena comunicación y música top." },
+        { name: "Raúl Sierra Corveiras", text: "Muy profesional, trato excelente y local impecable." },
+        { name: "Miguel Ard.", text: "Ambiente único y trato de 10. Repetiré." },
+        { name: "Jorge Navarro Delgado", text: "Profesionales con servicio impecable y buen trato." },
+        { name: "Leonardo Baldi", text: "Excelente atención, ambiente genial y buen precio." }
+    ];
+
+    
+    const reviewContainer = document.getElementById('review-container');
+    
+    if(reviewContainer && reviews) {
+        // Crear elementos de reseña
+        reviews.forEach(review => {
+            const reviewItem = document.createElement('div');
+            reviewItem.className = 'review-item p-4';
+            const content = `
+                <h3 class="text-xl font-bold mb-2">${review.name}</h3>
+                <div class="flex mb-3">
+                    <span class="star"><i class="ri-star-fill"></i></span>
+                    <span class="star"><i class="ri-star-fill"></i></span>
+                    <span class="star"><i class="ri-star-fill"></i></span>
+                    <span class="star"><i class="ri-star-fill"></i></span>
+                    <span class="star"><i class="ri-star-fill"></i></span>
+                </div>
+                <p class="italic">"${review.text}"</p>
+            `;
+            reviewItem.innerHTML = content;
+            reviewContainer.appendChild(reviewItem);
+        });
+        
+        // Configurar el slider
+        let currentIndex = 0;
+        const reviewItems = document.querySelectorAll('.review-item');
+        
+        // Establecer el ancho del contenedor
+        reviewContainer.style.width = `${reviewItems.length * 100}%`;
+        
+        function showReview(index) {
+            const position = -index * 100;
+            reviewContainer.style.transform = `translateX(${position}%)`;
+        }
+        
+        function nextReview() {
+            currentIndex = (currentIndex + 1) % reviewItems.length;
+            showReview(currentIndex);
+        }
+        
+        // Mostrar la primera reseña
+        showReview(currentIndex);
+        
+        // Iniciar el slider automático
+        setInterval(nextReview, 5000);
+    }
+    
+    // Audio player
+    const audio = document.getElementById('background-music');
+    if(audio) {
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        const volumeSlider = document.getElementById('volume-slider');
+        const muteBtn = document.getElementById('mute-btn');
+        const volumeIcon = document.getElementById('volume-icon');
+        
+        let wasPlaying = false;
+        let volumeBeforeMute = 30;
+        
+        // Establecer volumen inicial
+        audio.volume = 0.3;
+        
+        // Reproducir automáticamente cuando sea posible
+        if(playPauseBtn && playIcon && pauseIcon) {
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                }).catch(error => {
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
+                });
+            }
+            
+            // Botón reproducir/pausar
+            playPauseBtn.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play();
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                } else {
+                    audio.pause();
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
+                }
+            });
+        }
+        
+        // Control de volumen
+        if(volumeSlider) {
+            volumeSlider.addEventListener('input', function() {
+                const volume = this.value / 100;
+                audio.volume = volume;
+                updateVolumeIcon(volume);
+            });
+        }
+        
+        // Botón silenciar
+        if(muteBtn && volumeIcon) {
+            muteBtn.addEventListener('click', function() {
+                if (audio.volume > 0) {
+                    volumeBeforeMute = audio.volume;
+                    audio.volume = 0;
+                    volumeSlider.value = 0;
+                    volumeIcon.className = 'ri-volume-mute-line';
+                } else {
+                    audio.volume = volumeBeforeMute;
+                    volumeSlider.value = volumeBeforeMute * 100;
+                    updateVolumeIcon(volumeBeforeMute);
+                }
+            });
+        }
+        
+        function updateVolumeIcon(volume) {
+            if(volumeIcon) {
+                if (volume === 0) {
+                    volumeIcon.className = 'ri-volume-mute-line';
+                } else if (volume < 0.5) {
+                    volumeIcon.className = 'ri-volume-down-line';
+                } else {
+                    volumeIcon.className = 'ri-volume-up-line';
+                }
+            }
+        }
+        
+        // Pausar audio cuando la página pierde el foco
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                if (!audio.paused) {
+                    audio.pause();
+                    wasPlaying = true;
+                }
+            } else {
+                if (wasPlaying) {
+                    audio.play();
+                    wasPlaying = false;
+                }
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>
